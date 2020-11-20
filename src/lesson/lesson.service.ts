@@ -10,8 +10,8 @@ export class LessonService {
   constructor(@InjectRepository(Lesson) private lessonRepository: Repository<Lesson>) {}
 
   async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
-    const { name, startDate, endDate } = createLessonInput;
-    const lesson = this.lessonRepository.create({ id: uuid(), name, startDate, endDate });
+    const { name, startDate, endDate, students } = createLessonInput;
+    const lesson = this.lessonRepository.create({ id: uuid(), name, startDate, endDate, students });
     return this.lessonRepository.save(lesson);
   }
 
@@ -21,5 +21,11 @@ export class LessonService {
 
   async getLessons(): Promise<Lesson[]> {
     return this.lessonRepository.find();
+  }
+
+  async assignStudentsToLesson(lessonId: string, studentIds: string[]): Promise<Lesson> {
+    const lesson = await this.lessonRepository.findOne({ id: lessonId });
+    lesson.students = [...new Set([...lesson.students, ...studentIds])]; // only link unique studentIds
+    return this.lessonRepository.save(lesson);
   }
 }

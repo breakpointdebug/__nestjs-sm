@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { StudentGQLType } from "../student/student.gql-type";
 
 @ObjectType('Lesson')
 export class LessonGQLType {
@@ -13,4 +14,7 @@ export class LessonGQLType {
 
   @Field()
   endDate: string;
+
+  @Field(type => [StudentGQLType])
+  students: string[];
 }

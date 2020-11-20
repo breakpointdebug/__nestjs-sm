@@ -11,6 +11,9 @@ import { StudentService } from './student.service';
   providers: [
     StudentService,
     StudentResolver
+  ],
+  exports: [
+    StudentService // allow export provider within module, injectible in any other module
   ]
 })
 export class StudentModule {}
