@@ -9,8 +9,8 @@ import { LessonService } from './lesson.service';
     TypeOrmModule.forFeature([Lesson])
   ],
   providers: [
-    LessonResolver,
-    LessonService
+    LessonService,
+    LessonResolver
   ]
 })
 export class LessonModule {}

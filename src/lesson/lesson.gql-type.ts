@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 
 @ObjectType('Lesson')
-export class LessonType {
+export class LessonGQLType {
   @Field(type => ID)  // required to explicitly define type
   id: string;
 
